@@ -14,3 +14,10 @@ after_success:
   - docker build -t nikola/multi-nginx ./nginx
   - docker build -t nikola/multi-server ./server
   - docker build -t nikola/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Take those images and push them to docker hub
+  - docker push nikola/multi-client
+  - docker push nikola/multi-nginx
+  - docker push nikola/multi-server
+  - docker push nikola/multi-worker
